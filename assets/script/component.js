@@ -1,5 +1,5 @@
 const { default: Neon, api, wallet, tx, rpc, CONST, nep5, u } = require("@cityofzion/neon-js");
-var network = "http://47.88.51.107:51335";
+var network = "http://47.254.91.93:51335";
 var rpcClient = new rpc.RPCClient(network);
 cc.Class({
     extends: cc.Component,
@@ -31,7 +31,12 @@ cc.Class({
         var address = account._address;
         rpcClient.getAccountState(address)
         .then(result =>{
-            this.label.string=result.balances;
+            for(var balance of result.balances){
+                if(balance.asset === "0x"+CONST.ASSET_ID.NEO) balance.asset = "NEO"
+                if(balance.asset === "0x"+CONST.ASSET_ID.GAS) balance.asset = "GAS"
+             }
+            this.label.string=result.balances[0].asset+":"+result.balances[0].value;
+            console.log(result.balances[0])
         })
         .catch(err => {
             console.log(err);

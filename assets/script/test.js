@@ -1,5 +1,5 @@
 const { default: Neon, api, wallet, tx, rpc, CONST, nep5, u } = require("@cityofzion/neon-js");
-var network = "http://47.88.51.107:51335";
+var network = "http://47.254.91.93:51335";
 var rpcClient = new rpc.RPCClient(network);
 cc.Class({
     extends: cc.Component,
